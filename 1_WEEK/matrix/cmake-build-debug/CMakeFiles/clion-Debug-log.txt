@@ -1,0 +1,4 @@
+C:\instalki\jetbrainz\toolbox_apps\CLion\bin\cmake\win\x64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/instalki/jetbrainz/toolbox_apps/CLion/bin/ninja/win/x64/ninja.exe -G Ninja -S C:\Users\msztu\Desktop\UJ_LETNI_25\EAMPCPP\BACA_CPP\1_WEEK\matrix -B C:\Users\msztu\Desktop\UJ_LETNI_25\EAMPCPP\BACA_CPP\1_WEEK\matrix\cmake-build-debug
+-- Configuring done (0.2s)
+-- Generating done (0.1s)
+-- Build files have been written to: C:/Users/msztu/Desktop/UJ_LETNI_25/EAMPCPP/BACA_CPP/1_WEEK/matrix/cmake-build-debug

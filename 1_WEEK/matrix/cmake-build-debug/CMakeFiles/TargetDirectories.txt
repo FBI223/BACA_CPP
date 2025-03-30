@@ -1,0 +1,3 @@
+C:/Users/msztu/Desktop/UJ_LETNI_25/EAMPCPP/BACA_CPP/1_WEEK/matrix/cmake-build-debug/CMakeFiles/matrix.dir
+C:/Users/msztu/Desktop/UJ_LETNI_25/EAMPCPP/BACA_CPP/1_WEEK/matrix/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/msztu/Desktop/UJ_LETNI_25/EAMPCPP/BACA_CPP/1_WEEK/matrix/cmake-build-debug/CMakeFiles/rebuild_cache.dir

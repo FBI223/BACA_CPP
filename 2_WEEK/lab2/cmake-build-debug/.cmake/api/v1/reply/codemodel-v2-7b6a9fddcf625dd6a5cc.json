@@ -1,0 +1,87 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.17"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Lab2",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "DynamicContainer::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-DynamicContainer-Debug-9e888cab1b6b0c719124.json",
+					"name" : "DynamicContainer",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "StaticContainer::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-StaticContainer-Debug-4bc6c2dfc71737a6b173.json",
+					"name" : "StaticContainer",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "StaticContainer2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-StaticContainer2-Debug-944e2a3b0933bb963818.json",
+					"name" : "StaticContainer2",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "String::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-String-Debug-0a79da850c826b3d6a20.json",
+					"name" : "String",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/msztu/Desktop/UJ_LETNI_25/EAMPCPP/BACA_CPP/2_WEEK/lab2/cmake-build-debug",
+		"source" : "C:/Users/msztu/Desktop/UJ_LETNI_25/EAMPCPP/BACA_CPP/2_WEEK/lab2"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

@@ -1,0 +1,3 @@
+C:\instalki\jetbrainz\toolbox_apps\CLion\bin\cmake\win\x64\bin\cmake.exe -E rm -f CMakeFiles\DynamicContainer.dir/objects.a
+C:\instalki\jetbrainz\toolbox_apps\CLion\bin\mingw\bin\ar.exe qc CMakeFiles\DynamicContainer.dir/objects.a @CMakeFiles\DynamicContainer.dir\objects1.rsp
+C:\instalki\jetbrainz\toolbox_apps\CLion\bin\mingw\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\DynamicContainer.dir/objects.a -Wl,--no-whole-archive -o DynamicContainer.exe -Wl,--out-implib,libDynamicContainer.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\DynamicContainer.dir\linkLibs.rsp

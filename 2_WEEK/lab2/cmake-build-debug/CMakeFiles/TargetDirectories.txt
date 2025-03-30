@@ -1,0 +1,6 @@
+C:/Users/msztu/Desktop/UJ_LETNI_25/EAMPCPP/BACA_CPP/2_WEEK/lab2/cmake-build-debug/CMakeFiles/DynamicContainer.dir
+C:/Users/msztu/Desktop/UJ_LETNI_25/EAMPCPP/BACA_CPP/2_WEEK/lab2/cmake-build-debug/CMakeFiles/StaticContainer.dir
+C:/Users/msztu/Desktop/UJ_LETNI_25/EAMPCPP/BACA_CPP/2_WEEK/lab2/cmake-build-debug/CMakeFiles/StaticContainer2.dir
+C:/Users/msztu/Desktop/UJ_LETNI_25/EAMPCPP/BACA_CPP/2_WEEK/lab2/cmake-build-debug/CMakeFiles/String.dir
+C:/Users/msztu/Desktop/UJ_LETNI_25/EAMPCPP/BACA_CPP/2_WEEK/lab2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/msztu/Desktop/UJ_LETNI_25/EAMPCPP/BACA_CPP/2_WEEK/lab2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
