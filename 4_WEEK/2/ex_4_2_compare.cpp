@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 struct Rational{
@@ -7,6 +8,32 @@ struct Rational{
 			return a.nominator*b.denominator < b.nominator*a.denominator;
 		}
 };
+
+
+
+// Base template
+template<typename T>
+int compare(T a, T b) {
+	if (a < b) return 1;
+	if (b < a) return -1;
+	return 0;
+}
+
+// Pointer overload
+template<typename T>
+int compare(T* a, T* b) {
+	return compare(*a, *b);
+}
+
+// Specialization for const char*
+template<>
+int compare<const char*>(const char* a, const char* b) {
+	int res = strcmp(a, b);
+	if (res < 0) return -1;
+	if (res > 0) return 1;
+	return 0;
+}
+
 
 
 

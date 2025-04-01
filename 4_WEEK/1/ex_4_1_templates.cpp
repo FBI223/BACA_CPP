@@ -1,7 +1,13 @@
+
+
+
 #include <iostream>
 #include <vector>
 #include <list>
 #include <cmath>
+#include <functional>  // std::bind, std::placeholders
+
+
 using namespace std;
 
 
@@ -17,9 +23,58 @@ string sqr<string>(const string& x) {
 }
 
 
+template < int N>
+int mod(int a, int b) {
+    return (a + b) % N;
+}
+
+template < >
+int mod<0>(int a, int b) {
+    return (a + b);
+}
+
+
+// wszytkie klasy plus c tablice przeciazaja begin i end
+template <typename Iterable>
+void print(const Iterable& container) {
+    using std::begin;
+    using std::end;
+
+    for (auto it = begin(container); it != end(container); ++it)
+        std::cout << *it << " ";
+    std::cout << "\n";
+}
 
 
 
+template<typename C, typename F>
+C applyFun(const C& c, F f) {
+    C result;
+    for (const auto& el : c)
+        result.push_back(f(el));
+    return result;
+}
+
+template <typename Iterable, typename Function>
+Iterable applyFunBad(Iterable container, Function func) {
+    using std::begin;
+    using std::end;
+
+    for (auto& x : container)
+        x = func(x);
+
+    return container;
+}
+
+
+
+
+template <typename T, T (*f)(T), std::size_t N>
+void process(T (&array)[N]) {
+    for (std::size_t i = 0; i < N; ++i) {
+        array[i] = f(array[i]);
+    }
+}
 
 
 int main(){
@@ -44,6 +99,9 @@ int main(){
     double tab[] = {1.2, 3.4, 5.5};
     print(tab);                  // 1.2 3.4 5.5
 
+
+
+
     using namespace std::placeholders;  // for _1, _2, _3...
     // function template applyFun
     auto w = applyFun(v, sqr<int>);
@@ -55,6 +113,9 @@ int main(){
 
     auto w3 = applyFun(w, [](int a){return mod<0>(a, 3);}  );
     print(w3); // 4 444 1159 19 228
+
+
+
 
 
     auto l2 = applyFun(l, sqr<double>);
@@ -70,6 +131,8 @@ int main(){
     double a[] = {1, 2, 3, 4};
     process<double, sin, 4> (a);
     print(a);  // 0.841471 0.909297 0.14112 -0.756802
+
+
 
     return 0;
 }
