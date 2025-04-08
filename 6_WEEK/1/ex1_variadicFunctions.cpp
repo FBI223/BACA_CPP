@@ -7,7 +7,7 @@ int f(int x){
   return x*x;
 }
 int cube(int x){
-  return x*x*X;
+  return x*x*x;
 }
 
 int main(){
