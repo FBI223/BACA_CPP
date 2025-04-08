@@ -2,6 +2,11 @@
 //-------------------------------------------
 /// ADD FORWARD DECLARATIONS HERE
 
+template<typename T, typename S>
+class Pair;
+
+template<typename T, typename S>
+std::ostream & operator<<(std::ostream & out, const Pair<T, S> & pair);
 
 //-------------------------------------------
 // DO NOT CHANGE CLASS Pair
@@ -11,22 +16,40 @@ class Pair{
     const S second;
     static int numberOfPair;
 public:
-    Pair(T first, S second);                // Constructor, increases numberOfPairs
+    Pair(T first, S second) : first(first) , second(second) {numberOfPair++;};                // Constructor, increases numberOfPairs
     template <typename P, typename R>
-    explicit Pair(const Pair<P,R> & pair);  // Converting constructor, increases numberOfPairs
-    ~Pair();                                // Destructor, decreases numberOfPair
-    constexpr T getFirst() const;           // returns first, mark it inline
-    constexpr S getSecond() const;          // returns second, mark it inline
-    constexpr Pair<S,T> reverse() const;    // returns a reversed Pair
-    constexpr static int getNumberOfPairs();// return the number of existing objects of Pair<T,S>
-    // friend declaration with single template function operator<<(std::ostream, const Pair<T,S> &)
+    Pair(const Pair<P, R> & pair) // ma dostep pair do pair bo jest friend
+    : first(static_cast<T>(pair.first)), second(static_cast<S>(pair.second)) {
+        numberOfPair++;
+    }
+
+    ~Pair(){numberOfPair--;}                                // Destructor, decreases numberOfPair
+    constexpr T getFirst() const { return first; }
+    constexpr S getSecond() const { return second; }
+    constexpr Pair<S, T> reverse() const {
+        return Pair<S, T>(second, first);
+    }
+    constexpr static int getNumberOfPairs(){return numberOfPair;}
+
     friend std::ostream & operator<< <>(std::ostream & out, const Pair & pair);
-    // friend declaration with class template (any Pair<P,R>)
+
+
     template <typename, typename>
     friend class Pair;
 };
 //-------------------------------------------
 /// IMPLEMENTATION SECTION: Implement methods here
+template<typename T, typename S>
+int Pair<T, S>::numberOfPair = 0;
+
+
+template<typename T, typename S>
+std::ostream & operator<<(std::ostream & out, const Pair<T, S> & pair) {
+    return out << "(" << pair.first << ", " << pair.second << ")";
+}
+
+
+
 
 
 //-------------------------------------------
@@ -39,7 +62,7 @@ int main(){
     auto p2 = p.reverse();
     cout << p2 << endl;
     {
-        Pair<int, int> p3(p)
+        Pair<int, int> p3(p);
         cout << p3 << endl;
         cout << Pair<int, int>::getNumberOfPairs() << endl;
     }

@@ -3,6 +3,7 @@
 using namespace std;
 #include "dynamicVector.h"
 #include "staticVector.h"
+#include "vector_mix.h"
 
 template <int N>
 using SWektor = Vector<double, N>;

@@ -1,6 +1,6 @@
 
-#ifndef STATIC_VECTOR_H
-#define STATIC_VECTOR_H
+#pragma once
+#include "vector_base.h"
 
 
 #include <memory>
@@ -8,6 +8,7 @@
 #include <cassert>
 #include <vector>
 #include <cmath>
+
 
 template <typename T, size_t N>
 class Vector{
@@ -20,13 +21,25 @@ public:
     typedef T& reference;
     typedef const T& const_reference;
 
-    Vector() {/* TODO */ }
-    Vector(const Vector & v) { /* TODO */ }
-    Vector &operator=(const Vector & m) { /* TODO */ }
-    Vector(const std::initializer_list<T> &list){ /* TarrayODO */ }
+    Vector() {
+        for (size_type i = 0; i < N; ++i)
+            data[i] = T{};
+    }
 
-    friend Vector operator+ (const  Vector & u, const Vector & v ){
-        // TODO
+    Vector(const Vector & v) = default ;
+    Vector& operator=(const Vector& m) = default;
+
+    Vector(std::initializer_list<T> list) {
+        if (list.size() != N)
+            throw std::invalid_argument("Wrong number of elements");
+        std::copy(list.begin(), list.end(), data);
+    }
+
+    Vector<T, N> operator+(const Vector<T, N>& other) const {
+        Vector<T, N> result;
+        for (std::size_t i = 0; i < N; ++i)
+            result[i] = data[i] + other[i];
+        return result;
     }
 
     constexpr size_type size() const {
@@ -55,6 +68,18 @@ public:
         return out;
     }
 
+
+    explicit operator Vector<T, 0>() const {
+        Vector<T, 0> result(N);
+        for (size_type i = 0; i < N; ++i)
+            result[i] = data[i];
+        return result;
+    }
+
+
+
+
 };
 
-#endif //STATIC_VECTOR_H
+
+
