@@ -1,35 +1,80 @@
 #include <iostream>
 #include <typeinfo>
 #include <boost/type_index.hpp>
+
 using namespace std;
 
-double f(int x, double y, const int & z, int & w){
-    w += 2;
-	cout << x << " " << y<< " " << z << " " << w <<endl;
-	return (x*y - z*w);
+double f(int x, double y, const int &z, int &w) {
+ w += 2;
+ cout << x << " " << y << " " << z << " " << w << endl;
+ return (x * y - z * w);
 }
 
-int main(){
-    int x = 4;
-    const int y = 8;
-    showNames(x, 4.5, y, f);
-    showNames(1, 1.0f, 1.0, 1LL, &x, &y);
 
-    auto p = make_proxy(f);
+template<typename T>
+void showName(T &&arg) {
+ std::cout << " > "
+   << boost::typeindex::type_id_with_cvr<T>().pretty_name()
+   << " [" << typeid(arg).name() << "] = " << arg << "\n";
+}
+
+template<typename... Args>
+void showNames(Args &&... args) {
+ (showName(std::forward<Args>(args)), ...);
+ cout << endl;
+}
+
+
+template<typename F>
+class Proxy {
+ F f;
+
+public:
+ Proxy(F func) : f(std::move(func)) {
+ }
+
+
+ template<typename... Args>
+ auto operator()(Args &&... args) {
+  showNames(std::forward<Args>(args)...);
+  return f(std::forward<Args>(args)...);
+ }
+};
+
+
+template<typename F>
+auto make_proxy(F f) {
+ return Proxy<F>(std::move(f));
+}
+
+int main() {
+ int x = 4;
+ const int y = 8;
+ showNames(x, 4.5, y, f);
+ showNames(1, 1.0f, 1.0, 1LL, &x, &y);
+
+
+ auto p = make_proxy(f);
  //   auto p = Proxy(f);    /// with C++ 17
-    auto result1 = p(12, 5.1, y, x);
-    cout << "result1 = " << result1 << endl;
-    auto result2 = p(12, 5.1, y, x);
-    cout << "result2 = " << result2 << endl;
-    auto result3 = p(3, 3, 5, x);
-    cout << "result3 = " << result3 << endl;
-    
-    auto g = make_proxy([](int &&x, int & y){ y = x; return y; }) ;
+ auto result1 = p(12, 5.1, y, x);
+ cout << "result1 = " << result1 << endl;
+ auto result2 = p(12, 5.1, y, x);
+ cout << "result2 = " << result2 << endl;
+ auto result3 = p(3, 3, 5, x);
+ cout << "result3 = " << result3 << endl;
+
+ auto g = make_proxy([](int &&x, int &y) {
+  y = x;
+  return y;
+ });
  //   auto g = Proxy([](int &&x, int & y){ y = x; return y; }) ; // with C++ 17
-    cout << g(5, x) << endl;
-    cout << "x = " <<  x << endl;
-    return 0;
+ cout << g(5, x) << endl;
+ cout << "x = " << x << endl;
+
+
+ return 0;
 }
+
 /** Expected output 
  1 > int& [i] = 4
  2 > double [d] = 4.5

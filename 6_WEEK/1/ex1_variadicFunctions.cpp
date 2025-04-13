@@ -3,11 +3,38 @@
 
 using namespace std;
 
+template<typename T>
+T id(T arg)
+{
+  return arg;
+}
+
 int f(int x){
   return x*x;
 }
 int cube(int x){
   return x*x*x;
+}
+
+
+template<typename... Args>
+auto average(Args... args) {
+    return (static_cast<double>(args) + ...) / sizeof...(args);
+}
+
+template<typename F, typename... Ts>
+auto computeSum(F f, Ts... args) {
+    return (f(args) + ...);
+}
+
+template<typename Container, typename... Ts>
+void insert_old(Container& c, Ts&&... args) {
+    (c.push_back(std::forward<Ts>(args)), ...);
+}
+
+template<typename Container, typename... Ts>
+void insert(Container& c, Ts... args) {
+    (c.push_back(args), ...);  // brak forward = zawsze kopia
 }
 
 int main(){
