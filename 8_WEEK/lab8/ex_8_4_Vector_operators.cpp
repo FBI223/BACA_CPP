@@ -57,10 +57,10 @@ public:
 // Dodawanie: AddExpr
 template<typename L, typename R>
 struct AddExpr {
- const L &left;
- const R &right;
+ L left;
+ R right;
 
- AddExpr(const L &l, const R &r) : left(l), right(r) {
+ AddExpr(L &&l, R &&r) : left(l), right(r) {
  }
 
  int operator[](int i) const {
@@ -71,10 +71,10 @@ struct AddExpr {
 // Odejmowanie: SubExpr
 template<typename L, typename R>
 struct SubExpr {
- const L &left;
- const R &right;
+ L left;
+ R right;
 
- SubExpr(const L &l, const R &r) : left(l), right(r) {
+ SubExpr(L &&l, R &&r) : left(l), right(r) {
  }
 
  int operator[](int i) const {
@@ -85,10 +85,10 @@ struct SubExpr {
 // Mnożenie skalarne: MulExpr
 template<typename S, typename R>
 struct MulExpr {
- const S &scalar;
- const R &right;
+ S scalar;
+ R right;
 
- MulExpr(const S &s, const R &r) : scalar(s), right(r) {
+ MulExpr(S s, R &&r) : scalar(s), right(r) {
  }
 
  int operator[](int i) const {
@@ -96,20 +96,20 @@ struct MulExpr {
  }
 };
 
-
+// L ORAZ R to moze byc wektor jak i expression bo wspieraja [] operator
 template<typename L, typename R>
-AddExpr<L, R> operator+(const L &l, const R &r) {
- return AddExpr<L, R>(l, r);
+AddExpr<L, R> operator+(L &&l, R &&r) {
+ return AddExpr<L, R>(forward<L>(l), forward<R>(r));
 }
 
 template<typename L, typename R>
-SubExpr<L, R> operator-(const L &l, const R &r) {
- return SubExpr<L, R>(l, r);
+SubExpr<L, R> operator-(L &&l, R &&r) {
+ return SubExpr<L, R>(forward<L>(l), forward<R>(r));
 }
 
 template<typename S, typename R>
-MulExpr<S, R> operator*(const S &s, const R &r) {
- return MulExpr<S, R>(s, r);
+MulExpr<S, R> operator*(S s, R &&r) {
+ return MulExpr<S, R>(s, forward<R>(r));
 }
 
 
@@ -123,11 +123,16 @@ int main() {
  // It does not create temporary Vectors
  // It computes resulting vector coordinate by coordinate
  // (evaluating whole expression)
- V z = v + x + 3 * y - 2 * x;
+
+ auto z = v + x + 3 * y - 2 * x;
+ //Vector<10> z = v + x + 3 * y - 2 * x; // solution no 2
+
+
  // SubExpr<AddExpr<AddExpr<v, x>, MulExpr<3, y>>, MulExpr<2, x>
 
 
  // AddExpr<Vector, Vector> tmp1 = operator+(v, x);
+ // expr[i] → x[i] + v[i]
  // ...
  // MulExpr<int, Vector> tmp2 = operator*(3, y);
  // AddExpr<AddExpr<Vector, Vector>, MulExpr<int, Vector>> tmp3 = operator+(tmp1, tmp2);
