@@ -47,10 +47,6 @@ int main(int argc, char *argv[]) {
         threads.emplace_back(compute_ascii_sum, filename, move(prom));
     }
 
-    // czekamy na wszystkie wątki
-    for (auto &t: threads) {
-        t.join();
-    }
 
     // zbieranie wyników
     map<int, vector<string> > sum_to_files;
@@ -69,11 +65,24 @@ int main(int argc, char *argv[]) {
         }
     }
 
+
+    // czekamy na wszystkie wątki
+    for (auto &t: threads) {
+        t.join();
+    }
+
+
     return 0;
 }
 
 
 /*
+*{
+  198: [a.txt, b.txt],
+  207: [c.txt, d.txt],
+  216: [e.txt]
+}
+
 g++ ex_11_3_compute_ascii_sum.cpp -std=c++17 -pthread -o ascii_sum
 ./ascii_sum file1.txt file2.txt file3.txt
 
