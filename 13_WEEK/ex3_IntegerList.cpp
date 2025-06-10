@@ -1,5 +1,5 @@
 
-/*
+
 #include <iostream>
 #include <iomanip>
 
@@ -11,9 +11,10 @@ template<int... Ints>
 struct IntegerList {
 };
 
-// === getInt<Index, List> ===
+
 template<int Index, typename List>
 struct getInt;
+
 
 template<int Head, int... Tail>
 struct getInt<0, IntegerList<Head, Tail...> > {
@@ -25,7 +26,7 @@ struct getInt<Index, IntegerList<Head, Tail...> > {
     static constexpr int value = getInt<Index - 1, IntegerList<Tail...> >::value;
 };
 
-// === Join<ListA, ListB> ===
+
 template<typename A, typename B>
 struct Join;
 
@@ -34,7 +35,7 @@ struct Join<IntegerList<A...>, IntegerList<B...> > {
     using type = IntegerList<A..., B...>;
 };
 
-// === IsSorted<List> ===
+
 template<typename List>
 struct IsSorted;
 
@@ -53,7 +54,7 @@ struct IsSorted<IntegerList<A, B, Rest...> > {
     static constexpr bool value = (A <= B) && IsSorted<IntegerList<B, Rest...> >::value;
 };
 
-// === Max<List> ===
+
 template<typename List>
 struct Max;
 
@@ -68,18 +69,17 @@ struct Max<IntegerList<A, B, Rest...> > {
 };
 
 
-// Główna funkcja użytkownika
 template<typename List>
 void printList() {
     printListImpl(List{});
 }
 
-// Overload dla pustej listy
+
 void printListImpl(IntegerList<>) {
     cout << endl;
 }
 
-// Overload dla listy z co najmniej jednym elementem
+
 template<int Head, int... Tail>
 void printListImpl(IntegerList<Head, Tail...>) {
     cout << Head;
@@ -116,8 +116,8 @@ int main() {
     cout << "Max in listC (template): " << Max<listC>::value << endl;
 }
 
-*/
 
+/*
 
 #include <iostream>
 #include <array>
@@ -237,4 +237,4 @@ int main() {
     cout << Max<listC>::value << endl;
     cout << listC::max() << endl;
 }
-
+*/

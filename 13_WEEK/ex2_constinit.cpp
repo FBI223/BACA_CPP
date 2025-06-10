@@ -51,7 +51,7 @@ public:
   }
 
 
-  consteval int operator()(size_t n, size_t k) const {
+  constexpr int operator()(size_t n, size_t k) const {
     return triangle[n][k];
   }
 };
